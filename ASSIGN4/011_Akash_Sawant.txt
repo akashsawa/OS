@@ -1,0 +1,27 @@
+										NAME : AKASH VIJAY SAWANT
+										       ASSIGNMENT 4
+
+(Q) Which are the world writable files on my Linux system & then make them world readable.
+
+script:
+
+#!/bin/bash
+
+var=$(find /etc -perm -o=w -name "*.conf")
+echo $var > file
+
+while read line
+do
+        chmod o-w $line
+done < file
+
+for i in file
+ do
+        cat $i
+ done
+
+
+Console:
+
+[root@localhost home]# ./script1.sh
+/etc/fonts/conf.d/65-0-khmeros-base.conf /etc/fonts/conf.d/61-urw-fallback-backwards.conf /etc/fonts/conf.d/66-ucs-miscfixed.conf /etc/fonts/conf.d/31-cantarell.conf /etc/fonts/conf.d/60-overpass.conf /etc/fonts/conf.d/59-liberation-sans.conf /etc/fonts/conf.d/65-0-lohit-devanagari.conf /etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf /etc/fonts/conf.d/65-sil-padauk.conf /etc/fonts/conf.d/57-dejavu-sans.conf /etc/fonts/conf.d/65-0-nhn-nanum-gothic.conf /etc/fonts/conf.d/59-liberation-mono.conf /etc/fonts/conf.d/66-sil-abyssinica.conf /etc/fonts/conf.d/10-hinting-slight.conf /etc/fonts/conf.d/66-sil-nuosu.conf /etc/fonts/conf.d/10-scale-bitmap-fonts.conf /etc/fonts/conf.d/65-0-ttf-arphic-uming.conf /etc/fonts/conf.d/20-unhint-small-vera.conf /etc/fonts/conf.d/90-ttf-arphic-uming-embolden.conf /etc/fonts/conf.d/65-0-lohit-tamil.conf /etc/fonts/conf.d/25-unhint-nonlatin.conf /etc/fonts/conf.d/65-0-smc-meera.conf /etc/fonts/conf.d/30-metric-aliases.conf /etc/fonts/conf.d/69-gnu-free-sans.conf /etc/fonts/conf.d/30-urw-aliases.conf /etc/fonts/conf.d/69-gnu-free-serif.conf /etc/fonts/conf.d/40-nonlatin.conf /etc/fonts/conf.d/45-generic.conf /etc/fonts/conf.d/45-latin.conf /etc/fonts/conf.d/49-sansserif.conf /etc/fonts/conf.d/50-user.conf /etc/fonts/conf.d/51-local.conf /etc/fonts/conf.d/60-generic.conf /etc/fonts/conf.d/60-latin.conf /etc/fonts/conf.d/65-1-vlgothic-gothic.conf /etc/fonts/conf.d/65-fonts-persian.conf /etc/fonts/conf.d/65-nonlatin.conf /etc/fonts/conf.d/69-unifont.conf /etc/fonts/conf.d/80-delicious.conf /etc/fonts/conf.d/90-synthetic.conf /etc/fonts/conf.d/61-urw-gothic.conf /etc/fonts/conf.d/61-urw-c059.conf /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/61-urw-d050000l.conf /etc/fonts/conf.d/65-0-lohit-telugu.conf /etc/fonts/conf.d/61-urw-nimbus-sans.conf /etc/fonts/conf.d/65-0-lohit-marathi.conf /etc/fonts/conf.d/61-urw-nimbus-mono-ps.conf /etc/fonts/conf.d/61-urw-z003.conf /etc/fonts/conf.d/61-urw-bookman.conf /etc/fonts/conf.d/65-0-madan.conf /etc/fonts/conf.d/61-urw-standard-symbols-ps.conf /etc/fonts/conf.d/67-lohit-malayalam.conf /etc/fonts/conf.d/61-urw-nimbus-roman.conf /etc/fonts/conf.d/61-urw-p052.conf /etc/fonts/conf.d/65-0-jomolhari.conf /etc/fonts/conf.d/65-0-lohit-gujarati.conf /etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf /etc/fonts/conf.d/65-0-wqy-zenhei-sharp.conf /etc/fonts/conf.d/57-dejavu-serif.conf /etc/fonts/conf.d/65-0-lohit-oriya.conf /etc/fonts/conf.d/59-liberation-serif.conf /etc/fonts/conf.d/57-paratype-pt-sans.conf /etc/fonts/conf.d/30-0-google-crosextra-caladea-fontconfig.conf /etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf /etc/fonts/conf.d/65-0-lohit-assamese.conf /etc/fonts/conf.d/57-dejavu-sans-mono.conf /etc/fonts/conf.d/65-0-lohit-punjabi.conf /etc/fonts/conf.d/65-0-lohit-bengali.conf /etc/fonts/conf.d/65-0-paktype-naskh-basic.conf /etc/fonts/conf.d/61-stix.conf /etc/fonts/conf.d/65-lklug.conf /etc/fonts/conf.d/60-open-sans.conf /etc/fonts/conf.d/69-gnu-free-mono.conf /etc/fonts/conf.d/65-0-lohit-nepali.conf /etc/fonts/conf.d/65-0-lohit-kannada.conf /etc/fonts/conf.d/62-google-crosextra-caladea-fontconfig.conf /etc/fonts/conf.d/30-0-google-crosextra-carlito-fontconfig.conf /etc/fonts/conf.d/62-google-crosextra-carlito-fontconfig.conf /etc/sysctl.d/99-sysctl.conf /etc/alsa/conf.d/50-pulseaudio.conf

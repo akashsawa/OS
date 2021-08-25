@@ -1,0 +1,79 @@
+
+1. print unique words & no. their repetiotions from file.
+
+Script:
+#!/bin/bash
+
+
+cat file | sed 's| |\n|g' | sort -f > ani
+cat ani | uniq -c -i  
+
+op:
+[root@localhost home]# man uniq
+[root@localhost home]# vi script1.sh
+[root@localhost home]# ./script1.sh
+      1 
+      1 czech
+      2 Mumbai
+      2 Nairobi
+      2 Newjersey
+      1 Newyork
+      1 paris
+      3 spain
+      2 Tokyo
+
+2. Write a command that fetches the list of all world writable files under /root directory
+
+
+3.Create a script that asks for a user name and add that user with password same as that of user name. The user added should be assigned nologin shell
+
+script : 
+
+read -p "ENTER USERNAME: " usr
+useradd -s/usr/sbin/nologin -m -p $usr $usr
+
+4. Command to know how long the system has been running?
+
+uptime -s
+&
+uptime -p
+
+5. Use grep to find out all lines start with ‘aaa’ and can’t have numbers in between.
+
+SCRIPT:
+
+#!/bin/bash
+
+cat file | grep -i -P "^aaa" | grep -v -P "\d+"
+
+
+OP:
+
+[root@localhost home]# vi find.sh
+[root@localhost home]# cat file
+aaaakash123nbbj
+aaasagar45
+aaahjhfdjfhdj
+aaaaajkgfdjgk44
+
+[root@localhost home]# ./find.sh
+aaahjhfdjfhdj
+
+
+6. List all the shells in the system and display which one we are using
+
+Ans:
+
+[root@localhost ~]# chsh -l
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+/bin/tcsh
+/bin/csh
+[root@localhost ~]# chsh -l | echo $SHELL
+/bin/bash
+[root@localhost ~]# 
+
+
+                                                

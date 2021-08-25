@@ -1,0 +1,191 @@
+									
+									NAME : AKASH VIJAY SAWANT
+
+Q1 : What does this each location contains ?
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+
+ANS : 
+bin	Essential command binaries
+boot	Static files of the boot loader
+dev	Device files
+etc	Host-specific system configuration
+lib	Essential shared libraries and kernel modules
+media	Mount point for removable media
+mnt	Mount point for mounting a filesystem temporarily
+opt	Add-on application software packages
+run	Data relevant to running processes
+sbin	Essential system binaries
+srv	Data for services provided by this system
+tmp	Temporary files
+usr	Secondary hierarchy
+var	Variable data
+
+Q2: How to set umask temporary and permanant ?
+
+Setting umask temporary
+
+[root@localhost edac]# umask 0111
+[root@localhost edac]# ls -l
+total 0
+drwxr-xr-x. 2 root root  6 May  9 06:25 directory
+drwxr-xr-x. 3 root root 92 May  9 04:55 exp1script
+-rw-r--r--. 1 root root  0 May  9 01:42 file
+drwxr-xr-x. 3 root root 40 May  8 12:54 newscript
+drwxr-xr-x. 3 root root 39 May  8 10:40 scripts
+[root@localhost edac]# umask
+0111
+[root@localhost edac]# mkdir directory1
+[root@localhost edac]# touch file1
+[root@localhost edac]# ls -l
+total 0
+drwxr-xr-x. 2 root root  6 May  9 06:25 directory
+drw-rw-rw-. 2 root root  6 May  9 06:27 directory1
+drwxr-xr-x. 3 root root 92 May  9 04:55 exp1script
+-rw-r--r--. 1 root root  0 May  9 01:42 file
+-rw-rw-rw-. 1 root root  0 May  9 06:27 file1
+[root@localhost edac]# umask -S
+u=rw,g=rw,o=rw
+
+setting umask permanantly:
+
+[root@localhost edac]# grep umask /etc/bashrc
+    # By default, we want umask to get set. This sets it for non-login shell.
+       umask 002
+       umask 022
+[root@localhost edac]# grep umask /etc/profile
+# By default, we want umask to get set. This sets it for login shell
+    umask 002
+    umask 022
+[root@localhost edac]# id
+uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+
+
+
+
+Q3 : 
+[root@localhost /]# useradd user2
+[root@localhost /]# passwd user2
+Changing password for user user2.
+New password: 
+BAD PASSWORD: The password is shorter than 7 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost /]# su - user2
+[user2@localhost dir1]$ cd ..
+[user2@localhost ~]$ rm -rf *
+[user2@localhost ~]$ ls
+[user2@localhost ~]$ mkdir dir1
+[user2@localhost ~]$ ls
+dir1
+[user2@localhost ~]$ mkdir dir2
+[user2@localhost ~]$ ls
+dir1  dir2
+[user2@localhost ~]$ cd dir1/
+[user2@localhost dir1]$ touch file{1..100}
+[user2@localhost dir1]$ ls
+file1    file18  file27  file36  file45  file54  file63  file72  file81  file90
+file10   file19  file28  file37  file46  file55  file64  file73  file82  file91
+file100  file2   file29  file38  file47  file56  file65  file74  file83  file92
+file11   file20  file3   file39  file48  file57  file66  file75  file84  file93
+file12   file21  file30  file4   file49  file58  file67  file76  file85  file94
+file13   file22  file31  file40  file5   file59  file68  file77  file86  file95
+file14   file23  file32  file41  file50  file6   file69  file78  file87  file96
+file15   file24  file33  file42  file51  file60  file7   file79  file88  file97
+file16   file25  file34  file43  file52  file61  file70  file8   file89  file98
+file17   file26  file35  file44  file53  file62  file71  file80  file9   file99
+[user2@localhost ~]$ cd dir2/
+[user2@localhost dir2]$ ls
+[user2@localhost dir2]$ touch file{1..100}
+[user2@localhost dir2]$ ls
+file1    file18  file27  file36  file45  file54  file63  file72  file81  file90
+file10   file19  file28  file37  file46  file55  file64  file73  file82  file91
+file100  file2   file29  file38  file47  file56  file65  file74  file83  file92
+file11   file20  file3   file39  file48  file57  file66  file75  file84  file93
+file12   file21  file30  file4   file49  file58  file67  file76  file85  file94
+file13   file22  file31  file40  file5   file59  file68  file77  file86  file95
+file14   file23  file32  file41  file50  file6   file69  file78  file87  file96
+file15   file24  file33  file42  file51  file60  file7   file79  file88  file97
+file16   file25  file34  file43  file52  file61  file70  file8   file89  file98
+file17   file26  file35  file44  file53  file62  file71  file80  file9   file99
+[user2@localhost dir1]$ pwd
+/home/user2/dir1
+[user2@localhost dir1]$ ^C
+[user2@localhost dir1]$ cp */home/user2/dir2
+cp: missing destination file operand after ‘*/home/user2/dir2’
+Try 'cp --help' for more information.
+[user2@localhost dir1]$ cp * /home/user2/dir2
+[user2@localhost dir1]$ ls
+file1    file18  file27  file36  file45  file54  file63  file72  file81  file90
+file10   file19  file28  file37  file46  file55  file64  file73  file82  file91
+file100  file2   file29  file38  file47  file56  file65  file74  file83  file92
+file11   file20  file3   file39  file48  file57  file66  file75  file84  file93
+file12   file21  file30  file4   file49  file58  file67  file76  file85  file94
+file13   file22  file31  file40  file5   file59  file68  file77  file86  file95
+file14   file23  file32  file41  file50  file6   file69  file78  file87  file96
+file15   file24  file33  file42  file51  file60  file7   file79  file88  file97
+file16   file25  file34  file43  file52  file61  file70  file8   file89  file98
+file17   file26  file35  file44  file53  file62  file71  file80  file9   file99
+[user2@localhost dir2]$ mv * /home/user2/dir1
+[user2@localhost dir2]$ ls
+[user2@localhost dir2]$ 
+[user2@localhost dir2]$ cd ..
+[user2@localhost ~]$ cd dir1
+[user2@localhost dir1]$ ls
+file1    file18  file27  file36  file45  file54  file63  file72  file81  file90
+file10   file19  file28  file37  file46  file55  file64  file73  file82  file91
+file100  file2   file29  file38  file47  file56  file65  file74  file83  file92
+file11   file20  file3   file39  file48  file57  file66  file75  file84  file93
+file12   file21  file30  file4   file49  file58  file67  file76  file85  file94
+file13   file22  file31  file40  file5   file59  file68  file77  file86  file95
+file14   file23  file32  file41  file50  file6   file69  file78  file87  file96
+file15   file24  file33  file42  file51  file60  file7   file79  file88  file97
+file16   file25  file34  file43  file52  file61  file70  file8   file89  file98
+file17   file26  file35  file44  file53  file62  file71  file80  file9   file99
+
+Permisson of directory:
+[user2@localhost dir1]$ cd ..
+[user2@localhost ~]$ ls -l
+total 4
+drwxrwxr-x. 2 user2 user2 4096 May  8 05:41 dir1
+drwxrwxr-x. 2 user2 user2    6 May  8 05:41 dir2
+ 
+Move 2 files in directory 2:
+[user2@localhost ~]$ cd dir2
+[user2@localhost dir2]$ touch file{1,2}
+[user2@localhost dir2]$ ls
+file1  file2
+[user2@localhost dir2]$ ls
+[user2@localhost dir2]$ touch file1,file2
+[user2@localhost dir2]$ ls
+file1,file2
+
+Permisson of two files in directory2:
+[user2@localhost dir2]$ ls -l
+total 0
+-rw-rw-r--. 1 user2 user2 0 May  8 05:45 file1
+-rw-rw-r--. 1 user2 user2 0 May  8 05:45 file2
+
+Run command chmod:
+[user2@localhost ~]$ chmod -R 777 dir2
+[user2@localhost ~]$ ls -l
+total 4
+drwxrwxr-x. 2 user2 user2 4096 May  8 05:41 dir1
+drwxrwxrwx. 2 user2 user2   32 May  8 05:45 dir2
+
+Creating 21 test files in dir2:
+[user2@localhost ~]$ cd dir2/
+[user2@localhost dir2]$ touch testfile{1,2}
+[user2@localhost dir2]$ ls -l
+total 0
+-rwxrwxrwx. 1 user2 user2 0 May  8 05:45 file1
+-rwxrwxrwx. 1 user2 user2 0 May  8 05:45 file2
+-rw-rw-r--. 1 user2 user2 0 May  8 05:49 testfile1
+-rw-rw-r--. 1 user2 user2 0 May  8 05:49 testfile2
+[user2@localhost dir2]$ cd ..
+[user2@localhost ~]$ ls -l
+total 4
+drwxrwxr-x. 2 user2 user2 4096 May  8 05:41 dir1
+drwxrwxrwx. 2 user2 user2   66 May  8 05:49 dir2
+
+Permisson of 2 testfiels are not same as that of dir2.

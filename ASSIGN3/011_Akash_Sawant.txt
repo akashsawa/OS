@@ -1,0 +1,82 @@
+										NAME: AKASH VIJAY SAWANT
+										    PRN : 210540181011 
+										      ASSIGNMENT 3
+
+1. Write a script where user enters a file path and output says if input path is a file or a directroy
+
+Script:
+
+#!/bin/bash
+
+read -p "ENTER PATH: " path
+
+var=$(echo $path | awk -F"/" '{ print $NF }')
+
+
+#echo $var
+if [ -f $var ]
+then
+        echo "$var is a file"
+else
+        echo "directory"
+fi
+
+console: 
+
+[root@localhost exp1script]# cd /home/edac/exp1script
+[root@localhost exp1script]# ./script1.sh
+ENTER PATH: cd /home/edac
+edac
+[root@localhost exp1script]# vi script1.sh
+[root@localhost exp1script]# ./script1.sh
+ENTER PATH: cd /home/edac
+directory
+[root@localhost exp1script]# ./script1.sh
+ENTER PATH: cd/home/edac/exp1script/file
+file is a file
+
+2.Write a script where username is entered and its userid is displayed in the output
+
+Script:
+#!/bin/bash
+
+read -p "ENTER USERNAME:  " user
+
+var=$( cat /etc/passwd | grep -i $user | cut -d':' -f3 )
+
+#echo $var
+if [ -n $var ]
+then
+        echo "USERID: $var "
+fi
+
+Console: 
+[root@localhost exp1script]# vi script1.sh
+[root@localhost exp1script]# ./script1.sh
+ENTER USERNAME:  akash
+USERID: 1000 
+[root@localhost exp1script]# ./script1.sh
+ENTER USERNAME:  sagar
+USERID: 1001 
+
+3.List all the linux users with their USername,UID who are using bash shell
+
+Script:
+
+#!/bin/bash
+
+read -p "ENTER SHELL NAME: " shell
+var=$(cat /etc/passwd | grep -i $shell | cut -d":" -f1,3,7 )
+echo "USERID: $var "
+
+
+Console : 
+[root@localhost exp1script]# vi script1.sh
+[root@localhost exp1script]# ./script1.sh
+ENTER SHELL NAME: bash
+USERID: root:0:/bin/bash
+akash:1000:/bin/bash
+sagar:1001:/bin/bash 
+
+
+

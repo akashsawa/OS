@@ -1,0 +1,255 @@
+
+1. Write a command that fetches the list of all world writable files under /root directory
+
+Ans:   
+  
+[root@localhost home]# find /etc -perm -o=w -name "*.conf"
+
+
+2. Write a command that fetches the list of all files under /root directory that are more than 2KB in size
+ANS : 
+
+[root@localhost /]# ls -1 -l -sh /root | grep -v ".cfg" | awk -F" " '{if($6>2) print $10}'
+file
+
+3. Create a script that asks for a user name and add that user with password same as that of user name. The user added should be assigned nologin shell
+
+ANS : 
+
+script:
+
+#/bin/bash
+
+
+read -p "ENTER USERNAME: " var
+if [ -n $var ]
+        then
+                var1=$(echo cat /etc/passwd | grep "\b$var\b" | cut -d":" -f1 )
+        if [[ $var = $var1 ]]
+                then
+                        echo "$var is already present"
+        else
+                useradd -s /sbin/nologin $var
+                sleep 2s
+                $usr:$usr | chpasswd
+                sleep 2s
+                echo "$var added successfully"
+        fi
+else
+        echo "USER CANNOT BE EMPTY"
+        exit 0
+fi
+
+op:
+
+[root@localhost home]# ./script.sh
+ENTER USERNAME: vim
+vim added successfully
+ 
+4. Create a calculator program in bash that takes two numbers (integers) and display menu to the user for various mathematical operations. Hint: Switch Case Break
+
+ANS:
+
+Script:
+
+#!/bin/bash
+
+read -p "ENTER FIRST NUMBER: " num1
+read -p "ENTER SECOND NUMBER: " num2
+
+while [[ $ch != 0 ]]
+do
+
+        echo "ENTER 1 FOR ADDITION: "
+        echo "ENTER 2 FOR SUBTRACTION: "
+        echo "ENTER 3 FOR MULTIPLICATION: "
+        echo "ENTER 4 FOR DIVISION: "
+
+        read ch
+        case "$ch" in
+
+                1)    res=$(($num1 + $num2))
+                      echo "ADDITION: $res"
+                      ;;
+                2)    res=$(( $num1 - $num2))
+                      echo "SUBTRACTION: $res"
+                      ;;
+                3)    res=$(($num1 * $num2))
+                      echo "MULTIPLICATION: $res"
+                      ;;
+                4)    res=$(($num1 / $num2))
+                      echo "DIVISION: $res"
+                      ;;
+                *)    echo "INVALID INPUT"
+                      break
+                      ;;
+        esac
+done
+
+
+
+
+
+op :
+
+[root@localhost home]# ./cal.sh
+ENTER FIRST NUMBER: 300
+ENTER SECOND NUMBER: 10
+ENTER 1 FOR ADDITION: 
+ENTER 2 FOR SUBTRACTION: 
+ENTER 3 FOR MULTIPLICATION: 
+ENTER 4 FOR DIVISION: 
+1
+ADDITION: 310
+ENTER 1 FOR ADDITION: 
+ENTER 2 FOR SUBTRACTION: 
+ENTER 3 FOR MULTIPLICATION: 
+ENTER 4 FOR DIVISION: 
+2
+SUBTRACTION: 290
+ENTER 1 FOR ADDITION: 
+ENTER 2 FOR SUBTRACTION: 
+ENTER 3 FOR MULTIPLICATION: 
+ENTER 4 FOR DIVISION: 
+3
+MULTIPLICATION: 3000
+ENTER 1 FOR ADDITION: 
+ENTER 2 FOR SUBTRACTION: 
+ENTER 3 FOR MULTIPLICATION: 
+ENTER 4 FOR DIVISION: 
+4
+DIVISION: 30
+ENTER 1 FOR ADDITION: 
+ENTER 2 FOR SUBTRACTION: 
+ENTER 3 FOR MULTIPLICATION: 
+ENTER 4 FOR DIVISION: 
+6
+INVALID INPUT
+[root@localhost home]# 
+
+5. Create a script that depicts sending the process to background so that the next command in sequence can run without wait
+
+ANS : 
+
+script: 
+
+#!/bin/bash
+
+var=$(date)
+sleep 100s&
+jobs
+echo $var
+
+op:
+
+[root@localhost home]# vi back.sh
+[root@localhost home]# ./back.sh
+[1]+  Running                 sleep 100s &
+Sat May 29 09:37:08 PDT 2021
+
+
+6. Create a script that displays the system information like: OS name, kernel version, RAM, etc..
+
+ANS: 
+
+!/bin/bash
+
+var1=$(uname -a | cut -d" " -f1 )  OR  uname -s
+echo "OS name: $var1"
+var2=$(uname -r)
+echo "Kernal version: $var2"
+var3=$(free -mh | grep -i -E "\bmem\b" | awk -F" " '{print $2}')
+echo "RAM SIZE: $var3"
+
+{FOR HOSTNAME: uname -n    output: localhost.localdomain } 
+
+OP:
+  
+OS: name: Linux
+Kernal version: 3.10.0-1160.el7.x86_64
+RAM SIZE: 972M
+
+
+7. Create a shell script to find the largest among the 3 given numbers
+
+ANS: 
+
+Script:
+
+!/bin/bash
+
+read -p "ENTER NUM1:" num1
+
+read -p "ENTER NUM2:" num2
+read -p "ENTER NUM3:" num3
+
+
+if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
+then
+    echo $num1
+elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ]
+then
+    echo $num2
+else
+    echo $num3
+fi
+
+op :
+
+[root@localhost home]# ./large.sh
+ENTER NUM1:10
+ENTER NUM2:20
+ENTER NUM3:30
+30
+
+8. Create a shell program to check whether a given string is palindrome
+
+Ans: 
+
+Script:
+
+#!/bin/bash
+
+read -p" ENTER STRING : " str
+
+if [ $str == $(echo $str | rev) ]
+then
+    echo "STRING $str is a palindrome"
+else
+    echo "Not a palindrome"
+fi
+
+op: 
+
+[root@localhost home]# vi pal.sh
+[root@localhost home]# ./pal.sh
+ ENTER STRING : mom
+STRING mom is a palindrome
+
+9. Create a shell program to count number of words, characters, white spaces and special symbols in a given text
+
+ANS:
+
+#!/bin/bash
+
+read -p "ENTER STRING : " str
+
+a=$(echo $str | wc -w)
+echo "NO. OF WORDS: $a"
+b=$(echo $str | wc -c)
+echo "NO. OF CHARACTERS: $b"
+var=$(echo $str | grep " " | wc -l)
+var1=$(echo $str | grep -i -E -o "^[a-zA-Z0-9 ]*$" | wc -l)
+echo $var
+echo $var1
+
+OP:
+
+[root@localhost home]# ./words.sh
+ENTER STRING : fdfn dnsjd ><fdsn 
+NO. OF WORDS: 3
+NO. OF CHARACTERS: 18
+1
+0
+
+

@@ -1,0 +1,30 @@
+
+011 Akash sawant
+
+[root@localhost ~]# useradd test
+[root@localhost ~]# passwd test
+Changing password for user test.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# useradd test1
+[root@localhost ~]# passwd test1
+Changing password for user test1.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# userdel -r test
+[root@localhost ~]# useradd -u 1999 test2
+[root@localhost ~]# passwd test2
+Changing password for user test2.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+akash:x:1000:1000:linux:/home/akash:/bin/bash
+
+test1:x:1002:1002::/home/test1:/bin/bash
+test2:x:1999:1999::/home/test2:/bin/bash
